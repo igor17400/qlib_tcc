@@ -140,6 +140,7 @@ class DataHandler(Serializable):
             # make sure the fetch method is based on a index-sorted pd.DataFrame
             self._data = lazy_sort_index(self.data_loader.load(self.instruments, self.start_time, self.end_time))
         # TODO: cache
+        # self._data.to_csv("~/igorlima/igor_tcc/data_analysis/setup_data_data_handler.csv")
 
     CS_ALL = "__all"  # return all columns with single-level index column
     CS_RAW = "__raw"  # return raw data with multi-level index column

@@ -36,6 +36,8 @@ class XGBModel(Model, FeatureInt):
             col_set=["feature", "label"],
             data_key=DataHandlerLP.DK_L,
         )
+        # df_train.to_csv("~/igorlima/igor_tcc/data_analysis/df_train_xgboost.csv")
+        # df_valid.to_csv("~/igorlima/igor_tcc/data_analysis/df_valid_xgboost.csv")
         x_train, y_train = df_train["feature"], df_train["label"]
         x_valid, y_valid = df_valid["feature"], df_valid["label"]
 

@@ -1,0 +1,122 @@
+2022-04-14 23:50:11.020 | WARNING  | qlib.tests.data:qlib_data:150 - Data already exists: ~/igorlima/igor_tcc/qlib_data/br_data, the data download will be skipped
+	If downloading is required: `exists_skip=False` or `change target_dir`
+[105230:MainThread](2022-04-14 23:50:11,021) INFO - qlib.Initialization - [config.py:402] - default_conf: client.
+[105230:MainThread](2022-04-14 23:50:11,344) INFO - qlib.Initialization - [__init__.py:74] - qlib successfully initialized based on client settings.
+[105230:MainThread](2022-04-14 23:50:11,345) INFO - qlib.Initialization - [__init__.py:76] - data_path={'__DEFAULT_FREQ': PosixPath('/home/lisa/igorlima/igor_tcc/qlib_data/br_data')}
+[105230:MainThread](2022-04-14 23:50:11,345) INFO - qlib.Hyperparameter - [hyperparameter_360_XGBoost_br.py:83] - Dataset intialization
+[105230:MainThread](2022-04-14 23:50:21,059) INFO - qlib.timer - [log.py:113] - Time cost: 9.711s | Loading data Done
+[105230:MainThread](2022-04-14 23:50:21,232) INFO - qlib.timer - [log.py:113] - Time cost: 0.061s | DropnaLabel Done
+/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/qlib/data/dataset/processor.py:347: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[cols] = t
+[105230:MainThread](2022-04-14 23:50:21,397) INFO - qlib.timer - [log.py:113] - Time cost: 0.165s | CSRankNorm Done
+[105230:MainThread](2022-04-14 23:50:21,397) INFO - qlib.timer - [log.py:113] - Time cost: 0.338s | fit & process data Done
+[105230:MainThread](2022-04-14 23:50:21,397) INFO - qlib.timer - [log.py:113] - Time cost: 10.050s | Init data Done
+[105230:MainThread](2022-04-14 23:50:21,398) INFO - qlib.Hyperparameter - [hyperparameter_360_XGBoost_br.py:86] - Start parameter tuning
+[105230:MainThread](2022-04-14 23:50:23,437) ERROR - qlib.workflow - [utils.py:41] - An exception has been raised[KeyError: 'Record does not exist.'].
+  File "hyperparameter_360_XGBoost_br.py", line 87, in <module>
+    study = optuna.Study(study_name="XGBoost_360_br", storage="sqlite:///db_2_0.sqlite3")
+  File "/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/optuna/study/study.py", line 231, in __init__
+    study_id = storage.get_study_id_from_name(study_name)
+  File "/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/optuna/storages/_cached_storage.py", line 124, in get_study_id_from_name
+    return self._backend.get_study_id_from_name(study_name)
+  File "/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/optuna/storages/_rdb/storage.py", line 317, in get_study_id_from_name
+    study = models.StudyModel.find_or_raise_by_name(study_name, session)
+  File "/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/optuna/storages/_rdb/models.py", line 71, in find_or_raise_by_name
+    raise KeyError(NOT_FOUND_MSG)
+KeyError: 'Record does not exist.'
+2022-04-14 23:54:53.721 | WARNING  | qlib.tests.data:qlib_data:150 - Data already exists: ~/igorlima/igor_tcc/qlib_data/br_data, the data download will be skipped
+	If downloading is required: `exists_skip=False` or `change target_dir`
+[108015:MainThread](2022-04-14 23:54:53,722) INFO - qlib.Initialization - [config.py:402] - default_conf: client.
+[108015:MainThread](2022-04-14 23:54:54,031) INFO - qlib.Initialization - [__init__.py:74] - qlib successfully initialized based on client settings.
+[108015:MainThread](2022-04-14 23:54:54,031) INFO - qlib.Initialization - [__init__.py:76] - data_path={'__DEFAULT_FREQ': PosixPath('/home/lisa/igorlima/igor_tcc/qlib_data/br_data')}
+[108015:MainThread](2022-04-14 23:54:54,032) INFO - qlib.Hyperparameter - [hyperparameter_360_XGBoost_br.py:83] - Dataset intialization
+[108015:MainThread](2022-04-14 23:55:02,013) INFO - qlib.timer - [log.py:113] - Time cost: 7.978s | Loading data Done
+[108015:MainThread](2022-04-14 23:55:02,177) INFO - qlib.timer - [log.py:113] - Time cost: 0.058s | DropnaLabel Done
+/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/qlib/data/dataset/processor.py:347: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[cols] = t
+[108015:MainThread](2022-04-14 23:55:02,332) INFO - qlib.timer - [log.py:113] - Time cost: 0.155s | CSRankNorm Done
+[108015:MainThread](2022-04-14 23:55:02,332) INFO - qlib.timer - [log.py:113] - Time cost: 0.319s | fit & process data Done
+[108015:MainThread](2022-04-14 23:55:02,333) INFO - qlib.timer - [log.py:113] - Time cost: 8.298s | Init data Done
+[108015:MainThread](2022-04-14 23:55:02,333) INFO - qlib.Hyperparameter - [hyperparameter_360_XGBoost_br.py:86] - Start parameter tuning
+[23:55:06] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[23:55:07] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[23:55:05] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[0]	train-rmse:1.09959	valid-rmse:1.10450
+[23:55:08] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[0]	train-rmse:1.09960	valid-rmse:1.10451
+[23:55:09] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[23:55:11] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[0]	train-rmse:1.09958	valid-rmse:1.10449
+[0]	train-rmse:1.09951	valid-rmse:1.10442
+[0]	train-rmse:1.01947	valid-rmse:1.02992
+[0]	train-rmse:1.09960	valid-rmse:1.10451
+[20]	train-rmse:1.09960	valid-rmse:1.10451
+[20]	train-rmse:1.09773	valid-rmse:1.10261
+[20]	train-rmse:1.09935	valid-rmse:1.10427
+[40]	train-rmse:1.09959	valid-rmse:1.10450
+[20]	train-rmse:1.09913	valid-rmse:1.10403
+[40]	train-rmse:1.09597	valid-rmse:1.10083
+[60]	train-rmse:1.09959	valid-rmse:1.10450
+[20]	train-rmse:0.99588	valid-rmse:1.07785
+[40]	train-rmse:1.09912	valid-rmse:1.10403
+[60]	train-rmse:1.09424	valid-rmse:1.09908
+[80]	train-rmse:1.09959	valid-rmse:1.10450
+[40]	train-rmse:1.09868	valid-rmse:1.10358
+[100]	train-rmse:1.09958	valid-rmse:1.10449
+[80]	train-rmse:1.09255	valid-rmse:1.09736
+[60]	train-rmse:1.09888	valid-rmse:1.10379
+[120]	train-rmse:1.09958	valid-rmse:1.10449
+[100]	train-rmse:1.09088	valid-rmse:1.09567
+[40]	train-rmse:0.99696	valid-rmse:1.15388
+[60]	train-rmse:1.09824	valid-rmse:1.10312
+[140]	train-rmse:1.09957	valid-rmse:1.10448

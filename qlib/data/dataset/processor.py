@@ -338,12 +338,14 @@ class CSRankNorm(Processor):
         self.fields_group = fields_group
 
     def __call__(self, df):
+        # df.to_csv("~/igorlima/igor_tcc/data_analysis/df_inital_CSRankNorm.csv")
         # try not modify original dataframe
         cols = get_group_columns(df, self.fields_group)
         t = df[cols].groupby("datetime").rank(pct=True)
         t -= 0.5
         t *= 3.46  # NOTE: towards unit std
         df[cols] = t
+        # df.to_csv("~/igorlima/igor_tcc/data_analysis/df_CSRankNorm.csv")
         return df
 
 

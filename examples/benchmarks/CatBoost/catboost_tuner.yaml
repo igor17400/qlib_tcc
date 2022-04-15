@@ -1,0 +1,70 @@
+experiment:
+    name: tuner_experiment_catboost_br
+    tuner_class: QLibTuner
+qlib_client:
+    auto_mount: False
+    logging_level: INFO
+optimization_criteria:
+    report_type: model
+    report_factor: model_score
+    optim_type: max
+tuner_pipeline:
+  -
+    model:
+        class: CatBoostModel
+        module_path: qlib.contrib.model.catboost_model
+        space: SomeModelSpace
+    trainer:
+        class: RollingTrainer
+    strategy:
+        class: TopkDropoutStrategy
+        module_path: qlib.contrib.strategy
+        kwargs:
+            signal:
+                - <MODEL> 
+                - <DATASET>
+            topk: 50
+            n_drop: 5
+    max_evals: 2
+
+time_period:
+    rolling_period: 360
+    train_start_date: 2005-01-01
+    train_end_date: 2014-12-31
+    validate_start_date: 2015-01-01
+    validate_end_date: 2016-06-30
+    test_start_date: 2016-07-01
+    test_end_date: 2018-04-30
+data:
+    class: ALPHA360
+    provider_uri: /data/qlib
+    args:
+        start_date: 2005-01-01
+        end_date: 2018-04-30
+        dropna_label: True
+        dropna_feature: True
+    filter:
+        market: csi500
+        filter_pipeline:
+          -
+            class: NameDFilter
+            module_path: qlib.data.filter
+            args:
+              name_rule_re: S(?!Z3)
+              fstart_time: 2018-01-01
+              fend_time: 2018-12-11
+          -
+            class: ExpressionDFilter
+            module_path: qlib.data.filter
+            args:
+              rule_expression: $open/$factor<=45
+              fstart_time: 2018-01-01
+              fend_time: 2018-12-11
+backtest:
+    normal_backtest_args:
+        limit_threshold: 0.095
+        account: 500000
+        benchmark: SH000905
+        deal_price: vwap
+    long_short_backtest_args:
+        topk: 50
