@@ -8,7 +8,7 @@ data_handler_config: &data_handler_config
     start_time: 2008-01-01
     end_time: 2022-02-24
     fit_start_time: 2008-01-01
-    fit_end_time: 2018-12-31
+    fit_end_time: 2017-12-31
     instruments: *market
     infer_processors: []
     learn_processors:
@@ -16,7 +16,7 @@ data_handler_config: &data_handler_config
         - class: CSRankNorm
           kwargs:
               fields_group: label
-    label: ["Ref($close, -2) / Ref($close, -1) - 1"]
+    label: ["Ref($close, -1) / $close - 1"]
 
 port_analysis_config: &port_analysis_config
     strategy:
@@ -29,7 +29,7 @@ port_analysis_config: &port_analysis_config
             topk: 50
             n_drop: 5
     backtest:
-        start_time: 2021-01-01
+        start_time: 2020-01-01
         end_time: 2022-02-24
         account: 100000000
         benchmark: *benchmark
@@ -44,12 +44,14 @@ task:
         class: XGBModel
         module_path: qlib.contrib.model.xgboost
         kwargs:
-            eval_metric: rmse
-            colsample_bytree: 0.8149
-            eta: 0.0203
+            colsample_bytree: 0.8442658569272272
+            eta: 0.022097230087882953
             max_depth: 3
-            n_estimators: 393
-            subsample: 0.9854
+            n_estimators: 166
+            subsample: 0.9626062337518138
+            tensorboard: True
+            tensorboard_name: "rmse_number_143"
+            eval_metric: rmse
             nthread: 20
     dataset:
         class: DatasetH
@@ -60,9 +62,9 @@ task:
                 module_path: qlib.contrib.data.handler
                 kwargs: *data_handler_config
             segments:
-                train: [2008-01-01, 2018-12-31]
-                valid: [2019-01-01, 2020-12-31]
-                test: [2021-01-01, 2022-02-24]
+                train: [2008-01-01, 2017-12-31]
+                valid: [2018-01-01, 2019-12-31]
+                test: [2020-01-01, 2022-02-24]
     record:
         - class: SignalRecord
           module_path: qlib.workflow.record_temp

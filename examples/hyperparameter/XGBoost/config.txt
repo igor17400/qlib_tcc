@@ -1,0 +1,105 @@
+- general configuration:
+
+----------------------------------------------------------------
+data_handler_config = {
+    "start_time": "2008-01-01",
+    "end_time": "2022-02-24",
+    "fit_start_time": "2008-01-01",
+    "fit_end_time": "2018-12-31",
+    "instruments": market,
+    "infer_processors": [],
+    "learn_processors": [
+      {
+        "class": "DropnaLabel"
+      },
+      {
+        "class": "CSRankNorm",
+        "kwargs": {
+          "fields_group": "label"
+        }
+      }
+    ],
+    "label": [
+      "Ref($close, -2) / Ref($close, -1) - 1"
+    ]
+}
+
+dataset_config = {
+    "class": "DatasetH",
+    "module_path": "qlib.data.dataset",
+    "kwargs": {
+        "handler": {
+            "class": "Alpha360",
+            "module_path": "qlib.contrib.data.handler",
+            "kwargs": data_handler_config,
+        },
+        "segments": {
+            "train": ("2008-01-01", "2018-12-31"),
+            "valid": ("2019-01-01", "2020-12-31"),
+            "test": ("2021-01-01", "2022-02-24"),
+        },
+    },
+}
+----------------------------------------------------------------
+
+- db_1_0.sqlite3
+    - "segments": {
+            "train": ("2008-01-01", "2018-12-31"),
+            "valid": ("2019-01-01", "2020-12-31"),
+            "test": ("2021-01-01", "2022-02-24"),
+        }
+
+- db_2_0.sqlite3
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2020-12-31"),
+            "test": ("2021-01-01", "2022-02-24"),
+        }
+
+------------------- Pós Pandemia -------------------
+- db_3_0.sqlite3 (Pós pandemia)
+    - task:
+      task = {
+        "model": {
+            "class": "XGBModel",
+            "module_path": "qlib.contrib.model.xgboost",
+            "kwargs": {
+                "eval_metric": "rmse",
+                "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 1.0),
+                "eta": trial.suggest_float("eta", 1e-8, 1.0, log=True),
+                "max_depth": trial.suggest_int("max_depth", 3, 9, step=2),
+                "n_estimators": trial.suggest_int("n_estimators", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.2, 1.0),
+                "nthread": 20
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2016-12-31"),
+            "valid": ("2017-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
+        }
+
+
+- db_4_0.sqlite3 (Pós pandemia)
+    - task:
+      task = {
+        "model": {
+            "class": "XGBModel",
+            "module_path": "qlib.contrib.model.xgboost",
+            "kwargs": {
+                "eval_metric": "rmse",
+                "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 1.0),
+                "eta": trial.suggest_float("eta", 1e-8, 1.0, log=True),
+                "max_depth": trial.suggest_int("max_depth", 3, 9, step=2),
+                "n_estimators": trial.suggest_int("n_estimators", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.2, 1.0),
+                "nthread": 20
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
+        }

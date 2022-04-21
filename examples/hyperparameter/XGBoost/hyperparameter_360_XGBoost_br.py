@@ -15,7 +15,7 @@ data_handler_config = {
     "start_time": "2008-01-01",
     "end_time": "2022-02-24",
     "fit_start_time": "2008-01-01",
-    "fit_end_time": "2018-12-31",
+    "fit_end_time": "2017-12-31",
     "instruments": market,
     "infer_processors": [],
     "learn_processors": [
@@ -44,10 +44,10 @@ dataset_config = {
             "kwargs": data_handler_config,
         },
         "segments": {
-            "train": ("2008-01-01", "2018-12-31"),
-            "valid": ("2019-01-01", "2020-12-31"),
-            "test": ("2021-01-01", "2022-02-24"),
-        },
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
+        }
     },
 }
 
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     dataset = init_instance_by_config(dataset_config)
 
     logger.info("Start parameter tuning")
-    study = optuna.Study(study_name="XGBoost_360_br", storage="sqlite:///db_2_0.sqlite3")
+    study = optuna.Study(study_name="XGBoost_360_br", storage="sqlite:///db_4_0.sqlite3")
     study.optimize(objective, n_jobs=6)
     
     trial = study.best_trial

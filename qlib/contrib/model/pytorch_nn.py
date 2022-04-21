@@ -7,6 +7,7 @@ from __future__ import print_function
 from collections import defaultdict
 
 import os
+import sys
 import gc
 import numpy as np
 import pandas as pd
@@ -16,6 +17,7 @@ from sklearn.metrics import roc_auc_score, mean_squared_error
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torch.utils.tensorboard import SummaryWriter
 
 from .pytorch_utils import count_parameters
 from ...model.base import Model
@@ -34,6 +36,9 @@ from ...workflow import R
 from qlib.contrib.meta.data_selection.utils import ICLoss
 from torch.nn import DataParallel
 
+working_dir = os.getcwd()
+target_dir = os.path.join(os.path.relpath(working_dir), 'tensor_board')
+sys.path.insert(0, target_dir)
 
 class DNNModelPytorch(Model):
     """DNN Model
@@ -81,6 +86,8 @@ class DNNModelPytorch(Model):
             "layers": (256,),
         },
         valid_key=DataHandlerLP.DK_L,
+        tensorboard=False,
+        tensorboard_name=''
         # TODO: Infer Key is a more reasonable key. But it requires more detailed processing on label processing
     ):
         # Set logger.
@@ -106,6 +113,8 @@ class DNNModelPytorch(Model):
         self.data_parall = data_parall
         self.eval_train_metric = eval_train_metric
         self.valid_key = valid_key
+        self.tensorboard = tensorboard
+        self.tensorboard_name = tensorboard_name
 
         self.best_step = None
 
@@ -128,6 +137,8 @@ class DNNModelPytorch(Model):
             f"\npt_model_uri: {pt_model_uri}"
             f"\npt_model_kwargs: {pt_model_kwargs}"
         )
+        self.logger.info("Tensorboard: {}".format(self.tensorboard))
+        self.logger.info("Tensorboard Name: {}".format(self.tensorboard_name))
 
         if self.seed is not None:
             np.random.seed(self.seed)
@@ -138,6 +149,7 @@ class DNNModelPytorch(Model):
         self._scorer = mean_squared_error if loss == "mse" else roc_auc_score
 
         if init_model is None:
+            # Create our DNN (Deep Neural Network) model
             self.dnn_model = init_instance_by_config({"class": pt_model_uri, "kwargs": pt_model_kwargs})
 
             if self.data_parall:
@@ -189,9 +201,13 @@ class DNNModelPytorch(Model):
         save_path=None,
         reweighter=None,
     ):
+        if(self.tensorboard):
+            # Writer will output to ./runs/ directory by default
+            writer = SummaryWriter(log_dir=target_dir + '/runs/mlp/' + self.tensorboard_name)
+
         has_valid = "valid" in dataset.segments
         segments = ["train", "valid"]
-        vars = ["x", "y", "w"]
+        vars = ["x", "y", "w"] # x - input | y - output | w - weight
         all_df = defaultdict(dict)  # x_train, x_valid y_train, y_valid w_train, w_valid
         all_t = defaultdict(dict)  # tensors
         for seg in segments:
@@ -232,6 +248,11 @@ class DNNModelPytorch(Model):
         # prepare training data
         train_num = all_t["y"]["train"].shape[0]
 
+        # Add model with training data to tensor board
+        if(self.tensorboard):
+            writer.add_graph(self.dnn_model, all_t["x"]["train"])
+            writer.close()
+
         for step in range(1, self.max_steps + 1):
             if stop_steps >= self.early_stop_rounds:
                 if verbose:
@@ -256,7 +277,7 @@ class DNNModelPytorch(Model):
             # validation
             train_loss += loss.val
             # for evert `eval_steps` steps or at the last steps, we will evaluate the model.
-            if step % self.eval_steps == 0 or step == self.max_steps:
+            if step % self.eval_steps == 0 or step == self.max_steps or step < 20:
                 if has_valid:
                     stop_steps += 1
                     train_loss /= self.eval_steps
@@ -299,6 +320,14 @@ class DNNModelPytorch(Model):
                         self.logger.info(
                             f"[Step {step}]: train_loss {train_loss:.6f}, valid_loss {loss_val:.6f}, train_metric {metric_train:.6f}, valid_metric {metric_val:.6f}"
                         )
+
+                    if(self.tensorboard):
+                        # Add iterations results into tensorboard
+                        writer.add_scalar('training loss', train_loss, step)
+                        writer.add_scalar('validation loss', loss_val, step)
+                        writer.add_scalar('training metric (ic - Pearson correlation coefficient)', metric_train, step)
+                        writer.add_scalar('validation metric (ic - Pearson correlation coefficient)', metric_val, step)
+
                     evals_result["train"].append(train_loss)
                     evals_result["valid"].append(loss_val)
                     if loss_val < best_loss:
@@ -328,6 +357,8 @@ class DNNModelPytorch(Model):
             self.dnn_model.load_state_dict(torch.load(save_path, map_location=self.device))
         if self.use_gpu:
             torch.cuda.empty_cache()
+
+        return evals_result
 
     def get_lr(self):
         assert len(self.train_optimizer.param_groups) == 1

@@ -1,0 +1,218 @@
+- general configuration:
+
+----------------------------------------------------------------
+data_handler_config = {
+    "start_time": "2008-01-01",
+    "end_time": "2022-02-24",
+    "fit_start_time": "2008-01-01",
+    "fit_end_time": "2018-12-31",
+    "instruments": market,
+    "infer_processors": [],
+    "learn_processors": [
+      {
+        "class": "DropnaLabel"
+      },
+      {
+        "class": "CSRankNorm",
+        "kwargs": {
+          "fields_group": "label"
+        }
+      }
+    ],
+    "label": [
+      "Ref($close, -2) / Ref($close, -1) - 1"
+    ]
+}
+
+dataset_config = {
+    "class": "DatasetH",
+    "module_path": "qlib.data.dataset",
+    "kwargs": {
+        "handler": {
+            "class": "Alpha360",
+            "module_path": "qlib.contrib.data.handler",
+            "kwargs": data_handler_config,
+        },
+        "segments": {
+            "train": ("2008-01-01", "2018-12-31"),
+            "valid": ("2019-01-01", "2020-12-31"),
+            "test": ("2021-01-01", "2022-02-24"),
+        },
+    },
+}
+----------------------------------------------------------------
+
+- db_1_0.sqlite3
+    - "segments": {
+            "train": ("2008-01-01", "2018-12-31"),
+            "valid": ("2019-01-01", "2020-12-31"),
+            "test": ("2021-01-01", "2022-02-24"),
+        }
+
+- db_2_0.sqlite3
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2020-12-31"),
+            "test": ("2021-01-01", "2022-02-24"),
+        }
+
+- db_3_0.sqlite3
+    - "segments": {
+            "train": ("2008-01-01", "2016-12-31"),
+            "valid": ("2017-01-01", "2020-12-31"),
+            "test": ("2021-01-01", "2022-02-24"),
+        }
+
+------------------- Pós Pandemia -------------------
+- db_4_0.sqlite3 (Pós pandemia)
+    - task:
+      task = {
+          "model": {
+              "class": "CatBoostModel",
+              "module_path": "qlib.contrib.model.catboost_model",
+              "kwargs": {
+                  "loss": "RMSE",
+                  "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                  "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                  "subsample": trial.suggest_float("subsample", 0.1, 1),
+                  "max_depth": trial.suggest_int("max_depth", 1, 10),
+                  "thread_count": 20,
+                  "bootstrap_type": "Poisson",
+                  "grow_policy": "Lossguide",
+              },
+          },
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2016-12-31"),
+            "valid": ("2017-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
+        }
+
+- db_5_0.sqlite3 (Pós pandemia)
+    - task:
+      task = {
+          "model": {
+              "class": "CatBoostModel",
+              "module_path": "qlib.contrib.model.catboost_model",
+              "kwargs": {
+                  "loss": "Poisson",
+                  "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                  "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                  "subsample": trial.suggest_float("subsample", 0.1, 1),
+                  "max_depth": trial.suggest_int("max_depth", 1, 10),
+                  "thread_count": 20,
+                  "bootstrap_type": "Poisson",
+                  "grow_policy": "Lossguide",
+              },
+          },
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2016-12-31"),
+            "valid": ("2017-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
+        }
+
+- db_6_0.sqlite3 (Pós pandemia)
+    - task:
+      task = {
+          "model": {
+              "class": "CatBoostModel",
+              "module_path": "qlib.contrib.model.catboost_model",
+              "kwargs": {
+                  "loss": "MAE",
+                  "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                  "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                  "subsample": trial.suggest_float("subsample", 0.1, 1),
+                  "max_depth": trial.suggest_int("max_depth", 1, 10),
+                  "thread_count": 20,
+                  "bootstrap_type": "Poisson",
+                  "grow_policy": "Lossguide",
+              },
+          },
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2016-12-31"),
+            "valid": ("2017-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
+        }
+
+- db_7_0.sqlite3 (Pós pandemia)
+    - task:
+      task = {
+          "model": {
+              "class": "CatBoostModel",
+              "module_path": "qlib.contrib.model.catboost_model",
+              "kwargs": {
+                  "loss": "Huber",
+                  "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                  "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                  "subsample": trial.suggest_float("subsample", 0.1, 1),
+                  "max_depth": trial.suggest_int("max_depth", 1, 10),
+                  "thread_count": 20,
+                  "bootstrap_type": "Poisson",
+                  "grow_policy": "Lossguide",
+              },
+          },
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2016-12-31"),
+            "valid": ("2017-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
+        }
+
+- db_8_0.sqlite3 (Pós pandemia)
+    - task:
+      task = {
+          "model": {
+              "class": "CatBoostModel",
+              "module_path": "qlib.contrib.model.catboost_model",
+              "kwargs": {
+                  "loss": "Quantile",
+                  "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                  "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                  "subsample": trial.suggest_float("subsample", 0.1, 1),
+                  "max_depth": trial.suggest_int("max_depth", 1, 10),
+                  "thread_count": 20,
+                  "bootstrap_type": "Poisson",
+                  "grow_policy": "Lossguide",
+              },
+          },
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2016-12-31"),
+            "valid": ("2017-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
+        }
+
+
+- db_9_0.sqlite3 (Pós pandemia)
+    - task:
+      task = {
+          "model": {
+              "class": "CatBoostModel",
+              "module_path": "qlib.contrib.model.catboost_model",
+              "kwargs": {
+                  "loss": "RMSE",
+                  "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                  "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                  "subsample": trial.suggest_float("subsample", 0.1, 1),
+                  "max_depth": trial.suggest_int("max_depth", 1, 10),
+                  "thread_count": 20,
+                  "bootstrap_type": "Poisson",
+                  "grow_policy": "Lossguide",
+              },
+          },
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
+        }
+
+------------------- Pré Pandemia -------------------
+- db_X_0.sqlite3 (Pré pandemia)
+    - "segments": {
+            "train": ("2008-01-01", "2015-12-31"),
+            "valid": ("2016-01-01", "2017-12-31"),
+            "test": ("2018-01-01", "2020-01-01"),
+        }

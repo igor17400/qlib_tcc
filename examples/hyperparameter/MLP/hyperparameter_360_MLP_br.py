@@ -16,14 +16,14 @@ data_handler_config = {
     "start_time": "2008-01-01",
     "end_time": "2022-02-24",
     "fit_start_time": "2008-01-01",
-    "fit_end_time": "2018-12-31",
+    "fit_end_time": "2017-12-31",
     "instruments": market,
     "infer_processors": [
       {
         "class": "RobustZScoreNorm",
         "kwargs": {
           "fields_group": "feature",
-          "clip_outlier": true
+          "clip_outlier": "true"
         }
       },
       {
@@ -45,7 +45,7 @@ data_handler_config = {
       }
     ],
     "label": [
-      "Ref($close, -2) / Ref($close, -1) - 1"
+      "Ref($close, -1) / $close - 1"
     ]
 }
 
@@ -59,31 +59,36 @@ dataset_config = {
             "kwargs": data_handler_config,
         },
         "segments": {
-            "train": ("2008-01-01", "2018-12-31"),
-            "valid": ("2019-01-01", "2020-12-31"),
-            "test": ("2021-01-01", "2022-02-24"),
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24"),
         },
     },
 }
 
 def objective(trial):
+    ## For optimizer = gd
+    # lr = trial.suggest_float("lr", 1e-5, 1e-1, log=True)
+
+    ## For optimizer = adam
+    # lr = trial.suggest_float("lr", 1e-8, 1.0, log=True)
+
     task = {
         "model": {
             "class": "DNNModelPytorch",
             "module_path": "qlib.contrib.model.pytorch_nn",
             "kwargs": {
-                "loss": "RMSE",
-                "learning_rate": trial.suggest_uniform("eta", 1e-8, 1.0),
-                "subsample": trial.suggest_uniform("subsample", 0, 1),
-                "depth": trial.suggest_int("depth", 1, 12),
-                "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
-                "thread_count": 20,
-                "grow_policy": "Lossguide",
-                "bootstrap_type": "Poisson",
+                "optimizer": "adam",
+                "lr": trial.suggest_float("lr", 1e-5, 1e-1, log=True),
+                "loss": "mse",
+                "max_steps": trial.suggest_categorical("max_steps", [9000, 8000, 7000, 6000, 2000, 1000, 300]),
+                "batch_size": trial.suggest_categorical("batch_size", [1024, 2048, 4096, 8192]),
+                "tensorboard_fit": True
             },
         },
     }
 
+    logger.info("model:\n{:}".format(task["model"]))
     evals_result = dict()
     model = init_instance_by_config(task["model"])
     evals_result = model.fit(dataset, evals_result=evals_result)
@@ -100,7 +105,7 @@ if __name__ == "__main__":
     dataset = init_instance_by_config(dataset_config)
 
     logger.info("Start parameter tuning")
-    study = optuna.Study(study_name="MLP_360_br", storage="sqlite:///db_1_0.sqlite3")
+    study = optuna.Study(study_name="MLP_360_br", storage="sqlite:///db_7_0.sqlite3")
     study.optimize(objective)
     
     trial = study.best_trial

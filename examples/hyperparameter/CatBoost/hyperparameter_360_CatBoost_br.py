@@ -15,7 +15,7 @@ data_handler_config = {
     "start_time": "2008-01-01",
     "end_time": "2022-02-24",
     "fit_start_time": "2008-01-01",
-    "fit_end_time": "2018-12-31",
+    "fit_end_time": "2017-12-31",
     "instruments": market,
     "infer_processors": [],
     "learn_processors": [
@@ -44,9 +44,9 @@ dataset_config = {
             "kwargs": data_handler_config,
         },
         "segments": {
-            "train": ("2008-01-01", "2018-12-31"),
-            "valid": ("2019-01-01", "2020-12-31"),
-            "test": ("2021-01-01", "2022-02-24"),
+           "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2022-02-24")
         },
     },
 }
@@ -58,16 +58,16 @@ def objective(trial):
             "module_path": "qlib.contrib.model.catboost_model",
             "kwargs": {
                 "loss": "RMSE",
-                "learning_rate": trial.suggest_uniform("eta", 1e-8, 1.0),
-                "subsample": trial.suggest_uniform("subsample", 0, 1),
-                "depth": trial.suggest_int("depth", 1, 12),
+                "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
                 "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.1, 1),
+                "max_depth": trial.suggest_int("max_depth", 1, 10),
                 "thread_count": 20,
-                "grow_policy": "Lossguide",
                 "bootstrap_type": "Poisson",
+                "grow_policy": "Lossguide"
             },
-        },
-    }
+        }
+      }
 
     evals_result = dict()
     model = init_instance_by_config(task["model"])
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     dataset = init_instance_by_config(dataset_config)
 
     logger.info("Start parameter tuning")
-    study = optuna.Study(study_name="CatBoost_360_br", storage="sqlite:///db_2_0.sqlite3")
+    study = optuna.Study(study_name="CatBoost_360_br", storage="sqlite:///db_9_0.sqlite3")
     study.optimize(objective)
     
     trial = study.best_trial
