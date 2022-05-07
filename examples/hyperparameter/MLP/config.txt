@@ -1,3 +1,110 @@
+
+------------------------------ TCC ----------------------------------
+
+------------------ pre_pandemia ------------------
+- study_name="MLP_360_br_pre_pandemia_ibov"
+    - task:
+     task = {
+        "model": {
+            "class": "DNNModelPytorch",
+            "module_path": "qlib.contrib.model.pytorch_nn",
+            "kwargs": {
+                "optimizer": "adam",
+                "lr": trial.suggest_float("lr", 1e-5, 1e-1, log=True),
+                "loss": "mse",
+                "max_steps": trial.suggest_categorical("max_steps", [9000, 8000, 7000, 6000, 2000, 1000, 300]),
+                "batch_size": trial.suggest_categorical("batch_size", [1024, 2048, 4096, 8192]),
+                "tensorboard_fit": True
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2015-12-31"),
+            "valid": ("2016-01-01", "2017-12-31"),
+            "test": ("2018-01-01", "2019-12-31"),
+        }
+
+- study_name="MLP_360_br_pre_pandemia_b3"
+    - task:
+     task = {
+        "model": {
+            "class": "DNNModelPytorch",
+            "module_path": "qlib.contrib.model.pytorch_nn",
+            "kwargs": {
+                "optimizer": "adam",
+                "lr": trial.suggest_float("lr", 1e-5, 1e-1, log=True),
+                "loss": "mse",
+                "max_steps": trial.suggest_categorical("max_steps", [9000, 8000, 7000, 6000, 2000, 1000, 300]),
+                "batch_size": trial.suggest_categorical("batch_size", [1024, 2048, 4096, 8192]),
+                "tensorboard_fit": True
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2015-12-31"),
+            "valid": ("2016-01-01", "2017-12-31"),
+            "test": ("2018-01-01", "2019-12-31"),
+        }
+
+
+------------------ pos_pandemia ------------------
+- study_name="MLP_360_br_pos_pandemia_ibov"
+    - task:
+     task = {
+        "model": {
+            "class": "DNNModelPytorch",
+            "module_path": "qlib.contrib.model.pytorch_nn",
+            "kwargs": {
+                "optimizer": "adam",
+                "lr": trial.suggest_float("lr", 1e-5, 1e-1, log=True),
+                "loss": "mse",
+                "max_steps": trial.suggest_categorical("max_steps", [9000, 8000, 7000, 6000, 2000, 1000, 300]),
+                "batch_size": trial.suggest_categorical("batch_size", [1024, 2048, 4096, 8192]),
+                "tensorboard_fit": True
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2021-12-31"),
+        }
+
+- study_name="MLP_360_br_pos_pandemia_b3"
+    - task:
+     task = {
+        "model": {
+            "class": "DNNModelPytorch",
+            "module_path": "qlib.contrib.model.pytorch_nn",
+            "kwargs": {
+                "optimizer": "adam",
+                "lr": trial.suggest_float("lr", 1e-5, 1e-1, log=True),
+                "loss": "mse",
+                "max_steps": trial.suggest_categorical("max_steps", [9000, 8000, 7000, 6000, 2000, 1000, 300]),
+                "batch_size": trial.suggest_categorical("batch_size", [1024, 2048, 4096, 8192]),
+                "tensorboard_fit": True
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2021-12-31"),
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 - general configuration:
 
 ----------------------------------------------------------------

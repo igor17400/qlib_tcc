@@ -1,3 +1,118 @@
+------------------------------ TCC ----------------------------------
+
+------------------ pre_pandemia ------------------
+- study_name="CatBoost_360_br_pre_pandemia_ibov"
+    - task:
+      task = {
+        "model": {
+            "class": "CatBoostModel",
+            "module_path": "qlib.contrib.model.catboost_model",
+            "kwargs": {
+                "loss": "RMSE",
+                "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.1, 1),
+                "max_depth": trial.suggest_int("max_depth", 1, 10),
+                "thread_count": 20,
+                "bootstrap_type": "Poisson",
+                "grow_policy": "Lossguide"
+            },
+        }
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2015-12-31"),
+            "valid": ("2016-01-01", "2017-12-31"),
+            "test": ("2018-01-01", "2019-12-31"),
+        }
+
+
+- study_name="CatBoost_360_br_pre_pandemia_b3"
+    - task:
+      task = {
+        "model": {
+            "class": "CatBoostModel",
+            "module_path": "qlib.contrib.model.catboost_model",
+            "kwargs": {
+                "loss": "RMSE",
+                "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.1, 1),
+                "max_depth": trial.suggest_int("max_depth", 1, 10),
+                "thread_count": 20,
+                "bootstrap_type": "Poisson",
+                "grow_policy": "Lossguide"
+            },
+        }
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2015-12-31"),
+            "valid": ("2016-01-01", "2017-12-31"),
+            "test": ("2018-01-01", "2019-12-31"),
+        }
+
+
+------------------ pos_pandemia ------------------
+- study_name="CatBoost_360_br_pos_pandemia_ibov"
+    - task:
+      task = {
+        "model": {
+            "class": "CatBoostModel",
+            "module_path": "qlib.contrib.model.catboost_model",
+            "kwargs": {
+                "loss": "RMSE",
+                "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.1, 1),
+                "max_depth": trial.suggest_int("max_depth", 1, 10),
+                "thread_count": 20,
+                "bootstrap_type": "Poisson",
+                "grow_policy": "Lossguide"
+            },
+        }
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2021-12-31"),
+        }
+
+
+- study_name="CatBoost_360_br_pos_pandemia_b3"
+    - task:
+      task = {
+        "model": {
+            "class": "CatBoostModel",
+            "module_path": "qlib.contrib.model.catboost_model",
+            "kwargs": {
+                "loss": "RMSE",
+                "learning_rate": trial.suggest_loguniform("learning_rate", 1e-5, 1e0),
+                "num_leaves": trial.suggest_int("num_leaves", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.1, 1),
+                "max_depth": trial.suggest_int("max_depth", 1, 10),
+                "thread_count": 20,
+                "bootstrap_type": "Poisson",
+                "grow_policy": "Lossguide"
+            },
+        }
+      }
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2021-12-31"),
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 - general configuration:
 
 ----------------------------------------------------------------

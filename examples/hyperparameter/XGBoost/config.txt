@@ -1,3 +1,148 @@
+------------------------------ TCC ----------------------------------
+----------------- br_pre_pandemia -----------------
+- study_name="XGBoost_360_br_pre_pandemia_ibov"
+    - task:
+      task = {
+        "model": {
+            "class": "XGBModel",
+            "module_path": "qlib.contrib.model.xgboost",
+            "kwargs": {
+                "eval_metric": "rmse",
+                "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 1.0),
+                "eta": trial.suggest_float("eta", 1e-8, 1.0, log=True),
+                "max_depth": trial.suggest_int("max_depth", 3, 9, step=2),
+                "n_estimators": trial.suggest_int("n_estimators", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.2, 1.0),
+                "nthread": 20
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2015-12-31"),
+            "valid": ("2016-01-01", "2017-12-31"),
+            "test": ("2018-01-01", "2019-12-31"),
+        }
+
+- study_name="XGBoost_360_br_pre_pandemia_b3"
+    - task:
+      task = {
+        "model": {
+            "class": "XGBModel",
+            "module_path": "qlib.contrib.model.xgboost",
+            "kwargs": {
+                "eval_metric": "rmse",
+                "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 1.0),
+                "eta": trial.suggest_float("eta", 1e-8, 1.0, log=True),
+                "max_depth": trial.suggest_int("max_depth", 3, 9, step=2),
+                "n_estimators": trial.suggest_int("n_estimators", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.2, 1.0),
+                "nthread": 20
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2015-12-31"),
+            "valid": ("2016-01-01", "2017-12-31"),
+            "test": ("2018-01-01", "2019-12-31"),
+        }
+
+----------------- br_pos_pandemia -----------------
+- study_name="XGBoost_360_br_pos_pandemia_ibov"
+    - task:
+      task = {
+        "model": {
+            "class": "XGBModel",
+            "module_path": "qlib.contrib.model.xgboost",
+            "kwargs": {
+                "eval_metric": "rmse",
+                "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 1.0),
+                "eta": trial.suggest_float("eta", 1e-8, 1.0, log=True),
+                "max_depth": trial.suggest_int("max_depth", 3, 9, step=2),
+                "n_estimators": trial.suggest_int("n_estimators", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.2, 1.0),
+                "nthread": 20
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2021-12-31"),
+        }
+
+- study_name="XGBoost_360_br_pos_pandemia_b3"
+    - task:
+      task = {
+        "model": {
+            "class": "XGBModel",
+            "module_path": "qlib.contrib.model.xgboost",
+            "kwargs": {
+                "eval_metric": "rmse",
+                "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 1.0),
+                "eta": trial.suggest_float("eta", 1e-8, 1.0, log=True),
+                "max_depth": trial.suggest_int("max_depth", 3, 9, step=2),
+                "n_estimators": trial.suggest_int("n_estimators", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.2, 1.0),
+                "nthread": 20
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2021-12-31"),
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- study_name="XGBoost_360_br_pos_pandemia_ibov"
+    - task:
+      task = {
+        "model": {
+            "class": "XGBModel",
+            "module_path": "qlib.contrib.model.xgboost",
+            "kwargs": {
+                "eval_metric": "rmse",
+                "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 1.0),
+                "eta": trial.suggest_float("eta", 1e-8, 1.0, log=True),
+                "max_depth": trial.suggest_int("max_depth", 3, 9, step=2),
+                "n_estimators": trial.suggest_int("n_estimators", 1, 1024),
+                "subsample": trial.suggest_float("subsample", 0.2, 1.0),
+                "nthread": 20
+            },
+        },
+    }
+    - "segments": {
+            "train": ("2008-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2019-12-31"),
+            "test": ("2020-01-01", "2021-12-31"),
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 - general configuration:
 
 ----------------------------------------------------------------
@@ -103,3 +248,6 @@ dataset_config = {
             "valid": ("2018-01-01", "2019-12-31"),
             "test": ("2020-01-01", "2022-02-24"),
         }
+
+
+

@@ -13,10 +13,10 @@ market = "ibov"
 benchmark = "^bvsp"
 
 data_handler_config = {
-    "start_time": "2008-01-01",
-    "end_time": "2022-02-24",
+    "start_time": "2007-01-01",
+    "end_time": "2019-12-31",
     "fit_start_time": "2008-01-01",
-    "fit_end_time": "2017-12-31",
+    "fit_end_time": "2016-12-31",
     "instruments": market,
     "infer_processors": [
       {
@@ -45,7 +45,7 @@ data_handler_config = {
       }
     ],
     "label": [
-      "Ref($close, -1) / $close - 1"
+      "(Ref($close, -1) / $close) - 1"
     ]
 }
 
@@ -59,9 +59,9 @@ dataset_config = {
             "kwargs": data_handler_config,
         },
         "segments": {
-            "train": ("2008-01-01", "2017-12-31"),
-            "valid": ("2018-01-01", "2019-12-31"),
-            "test": ("2020-01-01", "2022-02-24"),
+            "train": ("2007-01-01", "2017-12-31"),
+            "valid": ("2018-01-01", "2018-12-31"),
+            "test": ("2019-01-01", "2019-12-31"),
         },
     },
 }
@@ -78,12 +78,14 @@ def objective(trial):
             "class": "DNNModelPytorch",
             "module_path": "qlib.contrib.model.pytorch_nn",
             "kwargs": {
-                "optimizer": "adam",
-                "lr": trial.suggest_float("lr", 1e-5, 1e-1, log=True),
                 "loss": "mse",
-                "max_steps": trial.suggest_categorical("max_steps", [9000, 8000, 7000, 6000, 2000, 1000, 300]),
-                "batch_size": trial.suggest_categorical("batch_size", [1024, 2048, 4096, 8192]),
-                "tensorboard_fit": True
+                "optimizer": "adam",
+                "batch_size": trial.suggest_categorical("batch_size", [1024, 2048, 4096]),
+                "lr": trial.suggest_float("lr", 1e-5, 1.0, log=True),
+                "max_steps": trial.suggest_categorical("max_steps", [6000, 2000, 1000, 300]),
+                "pt_model_kwargs": {
+                  "input_dim": 360
+                }
             },
         },
     }
@@ -98,14 +100,13 @@ def objective(trial):
 if __name__ == "__main__":
     logger.info("Qlib intialization")
     provider_uri = "~/igorlima/igor_tcc/qlib_data/br_data"
-    GetData().qlib_data(target_dir=provider_uri, region=REG_US, exists_skip=True)
-    qlib.init(provider_uri=provider_uri, region=REG_US)
+    qlib.init(provider_uri=provider_uri)
 
     logger.info("Dataset intialization")
     dataset = init_instance_by_config(dataset_config)
 
     logger.info("Start parameter tuning")
-    study = optuna.Study(study_name="MLP_360_br", storage="sqlite:///db_7_0.sqlite3")
+    study = optuna.Study(study_name="MLP_360_br_pre_pandemia_ibov", storage="sqlite:///db.sqlite3")
     study.optimize(objective)
     
     trial = study.best_trial

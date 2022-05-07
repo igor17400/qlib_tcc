@@ -1,0 +1,95 @@
+qlib_init:
+    provider_uri: "~/igorlima/igor_tcc/qlib_data/br_data"
+    
+market: &market all
+benchmark: &benchmark ^bvsp
+
+start_time: &start_time 2008-01-01
+end_time: &end_time 2021-12-31
+fit_end_time: &fit_end_time 2017-12-31
+
+backtest_start_time: &backtest_start_time 2020-01-01
+backtest_end_time: &backtest_end_time  2021-12-29
+
+train_period: &train_period [*start_time, *fit_end_time]
+valid_period: &valid_period [2018-01-01, 2019-12-31]
+test_period: &test_period [*backtest_start_time, *backtest_end_time]
+
+tensorboard_name_file: &tensorboard_name_file xgboost_pos_pandemia_b3  
+
+data_handler_config: &data_handler_config
+    start_time: *start_time
+    end_time: *end_time
+    fit_start_time: *start_time
+    fit_end_time: *fit_end_time
+    instruments: *market
+    infer_processors: []
+    learn_processors:
+        - class: DropnaLabel
+        - class: CSRankNorm
+          kwargs:
+              fields_group: label
+    label: ["Ref($close, -1) / $close - 1"]
+
+port_analysis_config: &port_analysis_config
+    strategy:
+        class: TopkDropoutStrategy
+        module_path: qlib.contrib.strategy
+        kwargs:
+            signal:
+                - <MODEL>
+                - <DATASET>
+            topk: 50
+            n_drop: 5
+    backtest:
+        start_time: *backtest_start_time
+        end_time: *backtest_end_time
+        account: 100000000
+        benchmark: *benchmark
+        exchange_kwargs:
+            limit_threshold: 0.095
+            deal_price: close
+            open_cost: 0.0005
+            close_cost: 0.0015
+            min_cost: 5
+task:
+    model:
+        class: XGBModel
+        module_path: qlib.contrib.model.xgboost
+        kwargs:
+            colsample_bytree: 0.4362943026
+            eta: 0.2228416179
+            max_depth: 5
+            n_estimators: 872
+            subsample: 0.5864370976
+            tensorboard: True
+            tensorboard_name: *tensorboard_name_file
+            eval_metric: rmse
+            nthread: 20
+    dataset:
+        class: DatasetH
+        module_path: qlib.data.dataset
+        kwargs:
+            handler:
+                class: Alpha360
+                module_path: qlib.contrib.data.handler
+                kwargs: *data_handler_config
+            segments:
+                train: *train_period
+                valid: *valid_period
+                test: *test_period
+    record:
+        - class: SignalRecord
+          module_path: qlib.workflow.record_temp
+          kwargs:
+            model: <MODEL>
+            dataset: <DATASET>
+        - class: SigAnaRecord
+          module_path: qlib.workflow.record_temp
+          kwargs:
+            ana_long_short: False
+            ann_scaler: 252
+        - class: PortAnaRecord
+          module_path: qlib.workflow.record_temp
+          kwargs:
+            config: *port_analysis_config

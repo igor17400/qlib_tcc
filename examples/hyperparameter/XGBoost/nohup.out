@@ -11696,3 +11696,340 @@ Parameters: { "n_estimators" } might not be used.
 [160]	train-rmse:1.01371	valid-rmse:1.01718
 [260]	train-rmse:0.99437	valid-rmse:0.99878
 [400]	train-rmse:0.99242	valid-rmse:0.99850
+2022-04-27 22:23:05.550 | WARNING  | qlib.tests.data:qlib_data:150 - Data already exists: ~/igorlima/igor_tcc/qlib_data/br_data, the data download will be skipped
+	If downloading is required: `exists_skip=False` or `change target_dir`
+[43087:MainThread](2022-04-27 22:23:05,578) INFO - qlib.Initialization - [config.py:402] - default_conf: client.
+[43087:MainThread](2022-04-27 22:23:05,892) INFO - qlib.Initialization - [__init__.py:74] - qlib successfully initialized based on client settings.
+[43087:MainThread](2022-04-27 22:23:05,893) INFO - qlib.Initialization - [__init__.py:76] - data_path={'__DEFAULT_FREQ': PosixPath('/home/lisa/igorlima/igor_tcc/qlib_data/br_data')}
+[43087:MainThread](2022-04-27 22:23:05,893) INFO - qlib.Hyperparameter - [hyperparameter_360_XGBoost_br.py:82] - Dataset intialization
+[43087:MainThread](2022-04-27 22:23:35,345) INFO - qlib.timer - [log.py:113] - Time cost: 29.449s | Loading data Done
+[43087:MainThread](2022-04-27 22:23:36,342) INFO - qlib.timer - [log.py:113] - Time cost: 0.278s | DropnaLabel Done
+/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/qlib/data/dataset/processor.py:347: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[cols] = t
+[43087:MainThread](2022-04-27 22:23:36,670) INFO - qlib.timer - [log.py:113] - Time cost: 0.328s | CSRankNorm Done
+[43087:MainThread](2022-04-27 22:23:36,670) INFO - qlib.timer - [log.py:113] - Time cost: 1.325s | fit & process data Done
+[43087:MainThread](2022-04-27 22:23:36,671) INFO - qlib.timer - [log.py:113] - Time cost: 30.775s | Init data Done
+[43087:MainThread](2022-04-27 22:23:36,671) INFO - qlib.Hyperparameter - [hyperparameter_360_XGBoost_br.py:85] - Start parameter tuning
+/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/optuna/study/study.py:393: FutureWarning: `n_jobs` argument has been deprecated in v2.7.0. This feature will be removed in v4.0.0. See https://github.com/optuna/optuna/releases/tag/v2.7.0.
+  warnings.warn(
+/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+[43087:ThreadPoolExecutor-2_2](2022-04-27 22:23:40,396) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43087:ThreadPoolExecutor-2_5](2022-04-27 22:23:40,397) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43087:ThreadPoolExecutor-2_2](2022-04-27 22:23:40,397) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[43087:ThreadPoolExecutor-2_5](2022-04-27 22:23:40,398) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[43087:ThreadPoolExecutor-2_0](2022-04-27 22:23:40,523) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43087:ThreadPoolExecutor-2_0](2022-04-27 22:23:40,653) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[43087:ThreadPoolExecutor-2_4](2022-04-27 22:23:40,986) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43087:ThreadPoolExecutor-2_4](2022-04-27 22:23:40,990) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[43087:ThreadPoolExecutor-2_1](2022-04-27 22:23:42,435) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43087:ThreadPoolExecutor-2_1](2022-04-27 22:23:42,438) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[22:23:43] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[43087:ThreadPoolExecutor-2_3](2022-04-27 22:23:43,421) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43087:ThreadPoolExecutor-2_3](2022-04-27 22:23:43,422) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[22:23:46] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[22:23:46] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+2022-04-27 22:25:38.203 | WARNING  | qlib.tests.data:qlib_data:150 - Data already exists: ~/igorlima/igor_tcc/qlib_data/br_data, the data download will be skipped
+	If downloading is required: `exists_skip=False` or `change target_dir`
+[43380:MainThread](2022-04-27 22:25:38,204) INFO - qlib.Initialization - [config.py:402] - default_conf: client.
+[43380:MainThread](2022-04-27 22:25:38,516) INFO - qlib.Initialization - [__init__.py:74] - qlib successfully initialized based on client settings.
+[43380:MainThread](2022-04-27 22:25:38,517) INFO - qlib.Initialization - [__init__.py:76] - data_path={'__DEFAULT_FREQ': PosixPath('/home/lisa/igorlima/igor_tcc/qlib_data/br_data')}
+[43380:MainThread](2022-04-27 22:25:38,517) INFO - qlib.Hyperparameter - [hyperparameter_360_XGBoost_br.py:82] - Dataset intialization
+[43380:MainThread](2022-04-27 22:26:07,723) INFO - qlib.timer - [log.py:113] - Time cost: 29.203s | Loading data Done
+[43380:MainThread](2022-04-27 22:26:08,724) INFO - qlib.timer - [log.py:113] - Time cost: 0.277s | DropnaLabel Done
+/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/qlib/data/dataset/processor.py:347: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[cols] = t
+[43380:MainThread](2022-04-27 22:26:09,054) INFO - qlib.timer - [log.py:113] - Time cost: 0.330s | CSRankNorm Done
+[43380:MainThread](2022-04-27 22:26:09,055) INFO - qlib.timer - [log.py:113] - Time cost: 1.331s | fit & process data Done
+[43380:MainThread](2022-04-27 22:26:09,055) INFO - qlib.timer - [log.py:113] - Time cost: 30.535s | Init data Done
+[43380:MainThread](2022-04-27 22:26:09,055) INFO - qlib.Hyperparameter - [hyperparameter_360_XGBoost_br.py:85] - Start parameter tuning
+/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/optuna/study/study.py:393: FutureWarning: `n_jobs` argument has been deprecated in v2.7.0. This feature will be removed in v4.0.0. See https://github.com/optuna/optuna/releases/tag/v2.7.0.
+  warnings.warn(
+/home/lisa/miniconda3/envs/igor_tcc/lib/python3.8/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+[43380:ThreadPoolExecutor-2_0](2022-04-27 22:26:12,333) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43380:ThreadPoolExecutor-2_0](2022-04-27 22:26:12,333) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[43380:ThreadPoolExecutor-2_3](2022-04-27 22:26:12,458) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43380:ThreadPoolExecutor-2_3](2022-04-27 22:26:12,461) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[43380:ThreadPoolExecutor-2_4](2022-04-27 22:26:12,914) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43380:ThreadPoolExecutor-2_4](2022-04-27 22:26:12,915) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[43380:ThreadPoolExecutor-2_2](2022-04-27 22:26:14,054) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43380:ThreadPoolExecutor-2_2](2022-04-27 22:26:14,055) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[43380:ThreadPoolExecutor-2_5](2022-04-27 22:26:14,421) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43380:ThreadPoolExecutor-2_5](2022-04-27 22:26:14,422) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[22:26:15] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[43380:ThreadPoolExecutor-2_1](2022-04-27 22:26:15,727) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43380:ThreadPoolExecutor-2_1](2022-04-27 22:26:15,728) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[22:26:17] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[22:26:21] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[22:26:23] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[22:26:25] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[22:26:16] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[0]	train-rmse:1.11208	valid-rmse:1.11349
+[0]	train-rmse:1.11102	valid-rmse:1.11245
+[0]	train-rmse:1.11208	valid-rmse:1.11349
+[0]	train-rmse:1.11208	valid-rmse:1.11349
+[0]	train-rmse:1.09870	valid-rmse:1.10065
+[0]	train-rmse:1.11208	valid-rmse:1.11349
+[20]	train-rmse:1.11208	valid-rmse:1.11348
+[20]	train-rmse:1.11208	valid-rmse:1.11349
+[40]	train-rmse:1.11208	valid-rmse:1.11348
+[60]	train-rmse:1.11207	valid-rmse:1.11348
+[20]	train-rmse:1.09108	valid-rmse:1.09327
+[20]	train-rmse:1.11208	valid-rmse:1.11348
+[40]	train-rmse:1.11208	valid-rmse:1.11348
+[80]	train-rmse:1.11207	valid-rmse:1.11347
+[100]	train-rmse:1.11207	valid-rmse:1.11347
+[60]	train-rmse:1.11208	valid-rmse:1.11348
+[120]	train-rmse:1.11206	valid-rmse:1.11347
+[20]	train-rmse:0.98948	valid-rmse:1.00003
+[40]	train-rmse:1.11207	valid-rmse:1.11348
+[40]	train-rmse:1.07412	valid-rmse:1.07700
+[140]	train-rmse:1.11206	valid-rmse:1.11346
+[160]	train-rmse:1.11206	valid-rmse:1.11346
+[80]	train-rmse:1.11208	valid-rmse:1.11348
+[180]	train-rmse:1.11205	valid-rmse:1.11346
+[60]	train-rmse:1.11207	valid-rmse:1.11347
+[60]	train-rmse:1.05957	valid-rmse:1.06315
+[200]	train-rmse:1.11205	valid-rmse:1.11345
+[100]	train-rmse:1.11208	valid-rmse:1.11348
+[220]	train-rmse:1.11204	valid-rmse:1.11345
+[20]	train-rmse:1.11207	valid-rmse:1.11347
+[240]	train-rmse:1.11204	valid-rmse:1.11345
+[120]	train-rmse:1.11207	valid-rmse:1.11348
+[40]	train-rmse:0.97275	valid-rmse:0.98868
+[80]	train-rmse:1.11206	valid-rmse:1.11347
+[260]	train-rmse:1.11204	valid-rmse:1.11344
+[80]	train-rmse:1.04719	valid-rmse:1.05142
+[280]	train-rmse:1.11203	valid-rmse:1.11344
+[140]	train-rmse:1.11207	valid-rmse:1.11347
+[300]	train-rmse:1.11203	valid-rmse:1.11344
+[320]	train-rmse:1.11203	valid-rmse:1.11343
+[100]	train-rmse:1.11206	valid-rmse:1.11346
+[160]	train-rmse:1.11207	valid-rmse:1.11347
+[100]	train-rmse:1.03666	valid-rmse:1.04153
+[340]	train-rmse:1.11202	valid-rmse:1.11343
+[360]	train-rmse:1.11202	valid-rmse:1.11343
+[180]	train-rmse:1.11207	valid-rmse:1.11347
+[60]	train-rmse:0.96733	valid-rmse:0.98732
+[380]	train-rmse:1.11202	valid-rmse:1.11343
+[120]	train-rmse:1.11205	valid-rmse:1.11346
+[120]	train-rmse:1.02764	valid-rmse:1.03314
+[400]	train-rmse:1.11201	valid-rmse:1.11342
+[200]	train-rmse:1.11207	valid-rmse:1.11347
+[420]	train-rmse:1.11201	valid-rmse:1.11342
+[440]	train-rmse:1.11201	valid-rmse:1.11342
+[220]	train-rmse:1.11206	valid-rmse:1.11347
+[140]	train-rmse:1.11205	valid-rmse:1.11345
+[40]	train-rmse:1.11205	valid-rmse:1.11346
+[460]	train-rmse:1.11200	valid-rmse:1.11341
+[140]	train-rmse:1.01994	valid-rmse:1.02608
+[480]	train-rmse:1.11200	valid-rmse:1.11341
+[240]	train-rmse:1.11206	valid-rmse:1.11347
+[500]	train-rmse:1.11200	valid-rmse:1.11340
+[80]	train-rmse:0.96385	valid-rmse:0.98716
+[160]	train-rmse:1.11204	valid-rmse:1.11345
+[520]	train-rmse:1.11199	valid-rmse:1.11340
+[160]	train-rmse:1.01343	valid-rmse:1.02014
+[260]	train-rmse:1.11206	valid-rmse:1.11347
+[540]	train-rmse:1.11199	valid-rmse:1.11340
+[560]	train-rmse:1.11199	valid-rmse:1.11339
+[280]	train-rmse:1.11206	valid-rmse:1.11346
+[580]	train-rmse:1.11198	valid-rmse:1.11339
+[180]	train-rmse:1.11204	valid-rmse:1.11345
+[180]	train-rmse:1.00780	valid-rmse:1.01508
+[600]	train-rmse:1.11198	valid-rmse:1.11339
+[300]	train-rmse:1.11206	valid-rmse:1.11346
+[620]	train-rmse:1.11198	valid-rmse:1.11339
+[100]	train-rmse:0.96049	valid-rmse:0.98718
+[640]	train-rmse:1.11197	valid-rmse:1.11338
+[200]	train-rmse:1.11203	valid-rmse:1.11344
+[320]	train-rmse:1.11206	valid-rmse:1.11346
+[660]	train-rmse:1.11197	valid-rmse:1.11338
+[200]	train-rmse:1.00301	valid-rmse:1.01086
+[680]	train-rmse:1.11197	valid-rmse:1.11338
+[60]	train-rmse:1.11204	valid-rmse:1.11345
+[340]	train-rmse:1.11205	valid-rmse:1.11346
+[700]	train-rmse:1.11197	valid-rmse:1.11337
+[220]	train-rmse:1.11203	valid-rmse:1.11344
+[720]	train-rmse:1.11196	valid-rmse:1.11337
+[220]	train-rmse:0.99894	valid-rmse:1.00729
+[360]	train-rmse:1.11205	valid-rmse:1.11346
+[740]	train-rmse:1.11196	valid-rmse:1.11336
+[760]	train-rmse:1.11196	valid-rmse:1.11336
+[120]	train-rmse:0.95763	valid-rmse:0.98724
+[240]	train-rmse:1.11202	valid-rmse:1.11343
+[380]	train-rmse:1.11205	valid-rmse:1.11346
+[780]	train-rmse:1.11195	valid-rmse:1.11336
+[240]	train-rmse:0.99536	valid-rmse:1.00421
+[800]	train-rmse:1.11195	valid-rmse:1.11336
+[400]	train-rmse:1.11205	valid-rmse:1.11346
+[820]	train-rmse:1.11195	valid-rmse:1.11335
+[260]	train-rmse:1.11202	valid-rmse:1.11343
+[840]	train-rmse:1.11194	valid-rmse:1.11335
+[420]	train-rmse:1.11205	valid-rmse:1.11345
+[860]	train-rmse:1.11194	valid-rmse:1.11335
+[260]	train-rmse:0.99221	valid-rmse:1.00160
+[880]	train-rmse:1.11194	valid-rmse:1.11334
+[138]	train-rmse:0.95509	valid-rmse:0.98731
+[32m[I 2022-04-27 23:29:31,251][0m Trial 0 finished with value: 0.987086 and parameters: {'colsample_bytree': 0.7945271916761447, 'eta': 0.05670636961801451, 'max_depth': 7, 'n_estimators': 891, 'subsample': 0.588662025679475}. Best is trial 0 with value: 0.987086.[0m
+[43380:ThreadPoolExecutor-2_0](2022-04-27 23:29:31,896) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43380:ThreadPoolExecutor-2_0](2022-04-27 23:29:31,896) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[23:29:42] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[0]	train-rmse:1.11208	valid-rmse:1.11349
+[440]	train-rmse:1.11204	valid-rmse:1.11345
+[900]	train-rmse:1.11193	valid-rmse:1.11334
+[280]	train-rmse:1.11201	valid-rmse:1.11342
+[80]	train-rmse:1.11203	valid-rmse:1.11344
+[920]	train-rmse:1.11193	valid-rmse:1.11333
+[280]	train-rmse:0.98956	valid-rmse:0.99943
+[940]	train-rmse:1.11193	valid-rmse:1.11333
+[460]	train-rmse:1.11204	valid-rmse:1.11345
+[20]	train-rmse:1.11208	valid-rmse:1.11348
+[960]	train-rmse:1.11192	valid-rmse:1.11333
+[300]	train-rmse:1.11201	valid-rmse:1.11342
+[980]	train-rmse:1.11192	valid-rmse:1.11332
+[480]	train-rmse:1.11204	valid-rmse:1.11345
+[300]	train-rmse:0.98729	valid-rmse:0.99762
+[999]	train-rmse:1.11192	valid-rmse:1.11332
+[32m[I 2022-04-27 23:37:48,221][0m Trial 3 finished with value: 1.113322 and parameters: {'colsample_bytree': 0.25404940296108924, 'eta': 7.333599636351217e-07, 'max_depth': 3, 'n_estimators': 446, 'subsample': 0.6815103950141459}. Best is trial 0 with value: 0.987086.[0m
+[43380:ThreadPoolExecutor-2_5](2022-04-27 23:37:48,861) INFO - qlib.XGBoostModel - [xgboost.py:29] - Tensorboard: False
+[43380:ThreadPoolExecutor-2_5](2022-04-27 23:37:48,862) INFO - qlib.XGBoostModel - [xgboost.py:30] - Tensorboard Name: 
+[23:38:01] WARNING: ../src/learner.cc:576: 
+Parameters: { "n_estimators" } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[40]	train-rmse:1.11207	valid-rmse:1.11348
+[0]	train-rmse:1.11208	valid-rmse:1.11348
+[500]	train-rmse:1.11204	valid-rmse:1.11345
+[320]	train-rmse:1.11200	valid-rmse:1.11341
+[320]	train-rmse:0.98519	valid-rmse:0.99601
+[60]	train-rmse:1.11207	valid-rmse:1.11347
+[520]	train-rmse:1.11204	valid-rmse:1.11345
+[340]	train-rmse:1.11200	valid-rmse:1.11341
+[540]	train-rmse:1.11204	valid-rmse:1.11344
+[20]	train-rmse:1.11204	valid-rmse:1.11344
+[80]	train-rmse:1.11206	valid-rmse:1.11347
+[340]	train-rmse:0.98342	valid-rmse:0.99468
+[100]	train-rmse:1.11201	valid-rmse:1.11343
+[560]	train-rmse:1.11204	valid-rmse:1.11344
+[360]	train-rmse:1.11199	valid-rmse:1.11340
+[100]	train-rmse:1.11206	valid-rmse:1.11346
+[580]	train-rmse:1.11203	valid-rmse:1.11344
+[360]	train-rmse:0.98186	valid-rmse:0.99357
+[40]	train-rmse:1.11199	valid-rmse:1.11340
+[380]	train-rmse:1.11199	valid-rmse:1.11340
+[600]	train-rmse:1.11203	valid-rmse:1.11344
+[120]	train-rmse:1.11206	valid-rmse:1.11346
+[380]	train-rmse:0.98048	valid-rmse:0.99261
+[620]	train-rmse:1.11203	valid-rmse:1.11344
+[400]	train-rmse:1.11198	valid-rmse:1.11339
+[140]	train-rmse:1.11205	valid-rmse:1.11346
+[640]	train-rmse:1.11203	valid-rmse:1.11344
+[60]	train-rmse:1.11195	valid-rmse:1.11336
+[400]	train-rmse:0.97923	valid-rmse:0.99178
+[160]	train-rmse:1.11205	valid-rmse:1.11345
+[420]	train-rmse:1.11198	valid-rmse:1.11339
+[660]	train-rmse:1.11203	valid-rmse:1.11343
+[120]	train-rmse:1.11200	valid-rmse:1.11341
+[420]	train-rmse:0.97815	valid-rmse:0.99109
+[680]	train-rmse:1.11202	valid-rmse:1.11343
+[180]	train-rmse:1.11204	valid-rmse:1.11345
+[440]	train-rmse:1.11197	valid-rmse:1.11338
+[80]	train-rmse:1.11191	valid-rmse:1.11332
+[700]	train-rmse:1.11202	valid-rmse:1.11343
+[440]	train-rmse:0.97715	valid-rmse:0.99051
+[200]	train-rmse:1.11204	valid-rmse:1.11344
+[720]	train-rmse:1.11202	valid-rmse:1.11343
+[460]	train-rmse:1.11197	valid-rmse:1.11338
+[740]	train-rmse:1.11202	valid-rmse:1.11343
+[220]	train-rmse:1.11203	valid-rmse:1.11344
+[100]	train-rmse:1.11186	valid-rmse:1.11328
+[460]	train-rmse:0.97629	valid-rmse:0.99003
+[480]	train-rmse:1.11197	valid-rmse:1.11337
+[760]	train-rmse:1.11202	valid-rmse:1.11343
+[240]	train-rmse:1.11203	valid-rmse:1.11343
+[140]	train-rmse:1.11199	valid-rmse:1.11340
+[480]	train-rmse:0.97547	valid-rmse:0.98959

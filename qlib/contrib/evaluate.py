@@ -26,7 +26,6 @@ logger = get_module_logger("Evaluate")
 
 def risk_analysis(r, N: int = None, freq: str = "day"):
     """Risk Analysis
-
     Parameters
     ----------
     r : pandas.Series
@@ -42,7 +41,7 @@ def risk_analysis(r, N: int = None, freq: str = "day"):
         # len(D.calendar(start_time='2010-01-01', end_time='2019-12-31', freq='day')) = 2384
         _freq_scaler = {
             Freq.NORM_FREQ_MINUTE: 240 * 238,
-            Freq.NORM_FREQ_DAY: 238,
+            Freq.NORM_FREQ_DAY: 252,
             Freq.NORM_FREQ_WEEK: 50,
             Freq.NORM_FREQ_MONTH: 12,
         }
@@ -73,7 +72,6 @@ def risk_analysis(r, N: int = None, freq: str = "day"):
 
 def indicator_analysis(df, method="mean"):
     """analyze statistical time-series indicators of trading
-
     Parameters
     ----------
     df : pandas.DataFrame
@@ -85,7 +83,6 @@ def indicator_analysis(df, method="mean"):
             Optional fields:
                 - 'deal_amount' is the total deal deal_amount, only necessary when method is 'amount_weighted'
                 - 'value' is the total trade value, only necessary when method is 'value_weighted'
-
         index: Index(datetime)
     method : str, optional
         statistics method of pa/ffr, by default "mean"
@@ -93,7 +90,6 @@ def indicator_analysis(df, method="mean"):
         - if method is 'amount_weighted', count the deal_amount weighted mean statistical value of each trade indicator
         - if method is 'value_weighted', count the value weighted mean statistical value of each trade indicator
         Note: statistics method of pos is always "mean"
-
     Returns
     -------
     pd.DataFrame
@@ -131,7 +127,6 @@ def backtest_daily(
     pos_type: str = "Position",
 ):
     """initialize the strategy and executor, then executor the backtest of daily frequency
-
     Parameters
     ----------
     start_time : Union[str, pd.Timestamp]
@@ -143,9 +138,7 @@ def backtest_daily(
         E.g. Executor[day](Executor[1min]),   setting `end_time == 20XX0301` will include all the minutes on 20XX0301
     strategy : Union[str, dict, BaseStrategy]
         for initializing outermost portfolio strategy. Please refer to the docs of init_instance_by_config for more information.
-
         E.g.
-
         .. code-block:: python
             # dict
             strategy = {
@@ -172,8 +165,6 @@ def backtest_daily(
             #     - "ClassName":  getattr(module, "ClassName")() will be used.
             # 3) specify module path with class name
             #     - "a.b.c.ClassName" getattr(<a.b.c.module>, "ClassName")() will be used.
-
-
     executor : Union[str, dict, BaseExecutor]
         for initializing the outermost executor.
     benchmark: str
@@ -187,9 +178,7 @@ def backtest_daily(
     exchange_kwargs : dict
         the kwargs for initializing Exchange
         E.g.
-
         .. code-block:: python
-
             exchange_kwargs = {
                 "freq": freq,
                 "limit_threshold": None, # limit_threshold is None, using C.limit_threshold
@@ -198,17 +187,14 @@ def backtest_daily(
                 "close_cost": 0.0015,
                 "min_cost": 5,
             }
-
     pos_type : str
         the type of Position.
-
     Returns
     -------
     report_normal: pd.DataFrame
         backtest report
     positions_normal: pd.DataFrame
         backtest positions
-
     """
     freq = "day"
     if executor is None:
@@ -260,7 +246,6 @@ def long_short_backtest(
 ):
     """
     A backtest for long-short strategy
-
     :param pred:        The trading signal produced on day `T`.
     :param topk:       The short topk securities and long topk securities.
     :param deal_price:  The price to deal the trading.

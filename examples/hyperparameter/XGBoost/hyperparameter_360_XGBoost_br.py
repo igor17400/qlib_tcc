@@ -8,12 +8,12 @@ from qlib.log import get_module_logger
 
 logger = get_module_logger("Hyperparameter")
 
-market = "ibov"
+market = "all"
 benchmark = "^bvsp"
 
 data_handler_config = {
     "start_time": "2008-01-01",
-    "end_time": "2022-02-24",
+    "end_time": "2021-12-31",
     "fit_start_time": "2008-01-01",
     "fit_end_time": "2017-12-31",
     "instruments": market,
@@ -30,7 +30,7 @@ data_handler_config = {
       }
     ],
     "label": [
-      "Ref($close, -2) / Ref($close, -1) - 1"
+      "(Ref($close, -1) / $close) - 1"
     ]
 }
 
@@ -46,7 +46,7 @@ dataset_config = {
         "segments": {
             "train": ("2008-01-01", "2017-12-31"),
             "valid": ("2018-01-01", "2019-12-31"),
-            "test": ("2020-01-01", "2022-02-24"),
+            "test": ("2020-01-01", "2021-12-31"),
         }
     },
 }
@@ -63,7 +63,7 @@ def objective(trial):
                 "max_depth": trial.suggest_int("max_depth", 3, 9, step=2),
                 "n_estimators": trial.suggest_int("n_estimators", 1, 1024),
                 "subsample": trial.suggest_float("subsample", 0.2, 1.0),
-                "nthread": 20
+                "nthread": 5
             },
         },
     }
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     dataset = init_instance_by_config(dataset_config)
 
     logger.info("Start parameter tuning")
-    study = optuna.Study(study_name="XGBoost_360_br", storage="sqlite:///db_4_0.sqlite3")
+    study = optuna.Study(study_name="XGBoost_360_br_pos_pandemia_b3", storage="sqlite:///db.sqlite3")
     study.optimize(objective, n_jobs=6)
     
     trial = study.best_trial

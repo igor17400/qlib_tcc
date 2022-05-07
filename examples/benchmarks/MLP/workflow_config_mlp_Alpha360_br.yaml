@@ -1,12 +1,11 @@
 qlib_init:
     provider_uri: "~/igorlima/igor_tcc/qlib_data/br_data"
-    region: us
 market: &market ibov
 benchmark: &benchmark ^bvsp
 
 data_handler_config: &data_handler_config
     start_time: 2008-01-01
-    end_time: 2022-02-24
+    end_time: 2019-12-31
     fit_start_time: 2008-01-01
     fit_end_time: 2017-12-31
     instruments: *market
@@ -23,7 +22,7 @@ data_handler_config: &data_handler_config
         - class: CSRankNorm
           kwargs:
               fields_group: label
-    label: ["Ref($close, -2) / Ref($close, -1) - 1"]
+    label: ["Ref($close, -1)/$close - 1"]
 
 port_analysis_config: &port_analysis_config
     strategy:
@@ -59,7 +58,6 @@ task:
             eval_train_metric: true
             tensorboard: true
             tensorboard_name: "gd_test_number_126"
-            GPU: 0
             pt_model_kwargs:
               input_dim: 360
     dataset:
@@ -72,8 +70,8 @@ task:
                 kwargs: *data_handler_config
             segments:
                 train: [2008-01-01, 2017-12-31]
-                valid: [2018-01-01, 2019-12-31]
-                test: [2020-01-01, 2022-02-24]
+                valid: [2018-01-01, 2018-12-31]
+                test: [2019-01-01, 2019-12-31]
     record: 
         - class: SignalRecord
           module_path: qlib.workflow.record_temp
