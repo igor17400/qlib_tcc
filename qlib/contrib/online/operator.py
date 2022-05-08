@@ -310,6 +310,8 @@ class Operator:
         print(analysis_result["excess_return_without_cost"])
         print("excess_return_with_cost:")
         print(analysis_result["excess_return_with_cost"])
+        print("portfolio return"):
+        print(risk_analysis(portfolio_metrics["return"]))
 
 
 def run():

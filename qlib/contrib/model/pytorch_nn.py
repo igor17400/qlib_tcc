@@ -79,6 +79,7 @@ class DNNModelPytorch(Model):
         data_parall=False,
         scheduler: Optional[Union[Callable]] = "default",  # when it is Callable, it accept one argument named optimizer
         init_model=None,
+        eval_valid_metric=True,
         eval_train_metric=False,
         pt_model_uri="qlib.contrib.model.pytorch_nn.Net",
         pt_model_kwargs={
@@ -111,6 +112,7 @@ class DNNModelPytorch(Model):
         self.seed = seed
         self.weight_decay = weight_decay
         self.data_parall = data_parall
+        self.eval_valid_metric = eval_valid_metric
         self.eval_train_metric = eval_train_metric
         self.valid_key = valid_key
         self.tensorboard = tensorboard
@@ -289,17 +291,21 @@ class DNNModelPytorch(Model):
                         preds = self._nn_predict(all_t["x"]["valid"], return_cpu=False)
                         cur_loss_val = self.get_loss(preds, all_t["w"]["valid"], all_t["y"]["valid"], self.loss_type)
                         loss_val = cur_loss_val.item()
-                        metric_val = (
-                            self.get_metric(
-                                preds.reshape(-1), all_t["y"]["valid"].reshape(-1), all_df["y"]["valid"].index
-                            )
-                            .detach()
-                            .cpu()
-                            .numpy()
-                            .item()
-                        )
                         R.log_metrics(val_loss=loss_val, step=step)
-                        R.log_metrics(val_metric=metric_val, step=step)
+
+                        if self.eval_valid_metric:
+                            metric_val = (
+                                self.get_metric(
+                                    preds.reshape(-1), all_t["y"]["valid"].reshape(-1), all_df["y"]["valid"].index
+                                )
+                                .detach()
+                                .cpu()
+                                .numpy()
+                                .item()
+                            )
+                            R.log_metrics(val_metric=metric_val, step=step)
+                        else:
+                            metric_val=np.nan
 
                         if self.eval_train_metric:
                             metric_train = (

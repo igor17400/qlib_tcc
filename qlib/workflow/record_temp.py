@@ -502,6 +502,8 @@ class PortAnaRecord(ACRecordTemp):
                 # print out results
                 pprint(f"The following are analysis results of benchmark return({_analysis_freq}).")
                 pprint(risk_analysis(report_normal["bench"], freq=_analysis_freq))
+                pprint(f"The following are analysis results of portfolio return({_analysis_freq}).")
+                pprint(risk_analysis(report_normal["return"], freq=_analysis_freq))
                 pprint(f"The following are analysis results of the excess return without cost({_analysis_freq}).")
                 pprint(analysis["excess_return_without_cost"])
                 pprint(f"The following are analysis results of the excess return with cost({_analysis_freq}).")

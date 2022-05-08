@@ -4,15 +4,15 @@ qlib_init:
 market: &market ibov
 benchmark: &benchmark ^bvsp
 
-start_time: &start_time 2007-01-01
+start_time: &start_time 2008-01-01
 end_time: &end_time 2019-12-31
-fit_end_time: &fit_end_time 2017-12-31
+fit_end_time: &fit_end_time 2015-12-31
 
-backtest_start_time: &backtest_start_time 2019-01-01
+backtest_start_time: &backtest_start_time 2018-01-01
 backtest_end_time: &backtest_end_time  2019-12-31
 
 train_period: &train_period [*start_time, *fit_end_time]
-valid_period: &valid_period [2018-01-01, 2018-12-31]
+valid_period: &valid_period [2016-01-01, 2017-12-31]
 test_period: &test_period [*backtest_start_time, *backtest_end_time]
 
 tensorboard_name_file: &tensorboard_name_file mlp_pre_pandemia_ibov  
@@ -66,10 +66,11 @@ task:
         kwargs:
             loss: mse
             optimizer: adam
-            batch_size: 1024
-            lr: 0.007931179799
-            max_steps: 2000
-            eval_train_metric: true
+            batch_size: 4096
+            lr: 0.01843950593
+            max_steps: 6000
+            eval_valid_metric: false
+            eval_train_metric: false
             tensorboard: true
             tensorboard_name: *tensorboard_name_file
             pt_model_kwargs:

@@ -59,9 +59,9 @@ dataset_config = {
             "kwargs": data_handler_config,
         },
         "segments": {
-            "train": ("2007-01-01", "2017-12-31"),
-            "valid": ("2018-01-01", "2018-12-31"),
-            "test": ("2019-01-01", "2019-12-31"),
+            "train": ("2007-01-01", "2016-12-31"),
+            "valid": ("2017-01-01", "2017-12-31"),
+            "test": ("2018-01-01", "2019-12-31"),
         },
     },
 }
@@ -80,9 +80,10 @@ def objective(trial):
             "kwargs": {
                 "loss": "mse",
                 "optimizer": "adam",
-                "batch_size": trial.suggest_categorical("batch_size", [1024, 2048, 4096]),
-                "lr": trial.suggest_float("lr", 1e-5, 1.0, log=True),
-                "max_steps": trial.suggest_categorical("max_steps", [6000, 2000, 1000, 300]),
+                "eval_valid_metric": False,
+                "batch_size": trial.suggest_categorical("batch_size", [1024, 2048, 4096, 8192]),
+                "lr": trial.suggest_float("lr", 1e-5, 1e-1, log=True),
+                 "max_steps": trial.suggest_categorical("max_steps", [9000, 8000, 7000, 6000, 2000, 1000, 300]),
                 "pt_model_kwargs": {
                   "input_dim": 360
                 }
