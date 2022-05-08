@@ -11,6 +11,8 @@
 Recent released features
 | Feature | Status |
 | --                      | ------    |
+| HIST and IGMTF models | :chart_with_upwards_trend: [Released](https://github.com/microsoft/qlib/pull/1040) on Apr 10, 2022 |
+| Qlib [notebook tutorial](https://github.com/microsoft/qlib/tree/main/examples/tutorial) | 📖 [Released](https://github.com/microsoft/qlib/pull/1037) on Apr 7, 2022 | 
 | Ibovespa index data | :rice: [Released](https://github.com/microsoft/qlib/pull/990) on Apr 6, 2022 |
 | Point-in-Time database | :hammer: [Released](https://github.com/microsoft/qlib/pull/343) on Mar 10, 2022 |
 | Arctic Provider Backend & Orderbook data example | :hammer: [Released](https://github.com/microsoft/qlib/pull/744) on Jan 17, 2022 |
@@ -30,7 +32,7 @@ Recent released features
 | High-frequency data processing example | :hammer: [Released](https://github.com/microsoft/qlib/pull/257) on Feb 5, 2021  |
 | High-frequency trading example | :chart_with_upwards_trend: [Part of code released](https://github.com/microsoft/qlib/pull/227) on Jan 28, 2021  | 
 | High-frequency data(1min) | :rice: [Released](https://github.com/microsoft/qlib/pull/221) on Jan 27, 2021 |
-| Tabnet Model | :chart_with_upwards_trend: [Released](https://github.com/microsoft/qlib/pull/205) on Jan 22, 2021 | 
+| Tabnet Model | :chart_with_upwards_trend: [Released](https://github.com/microsoft/qlib/pull/205) on Jan 22, 2021 |
 
 Features released before 2021 are not listed here.
 
@@ -338,6 +340,8 @@ Here is a list of models built on `Qlib`.
 - [TCN based on pytorch (Shaojie Bai, et al. 2018)](examples/benchmarks/TCN/)
 - [ADARNN based on pytorch (YunTao Du, et al. 2021)](examples/benchmarks/ADARNN/)
 - [ADD based on pytorch (Hongshun Tang, et al.2020)](examples/benchmarks/ADD/)
+- [IGMTF based on pytorch (Wentao Xu, et al.2021)](examples/benchmarks/IGMTF/)
+- [HIST based on pytorch (Wentao Xu, et al.2021)](examples/benchmarks/HIST/)
 
 Your PR of new Quant models is highly welcomed.
 
@@ -386,6 +390,8 @@ Dataset plays a very important role in Quant. Here is a list of the datasets bui
 Your PR to build new Quant dataset is highly welcomed.
 
 # More About Qlib
+If you want to have a quick glance at the most frequently used components of qlib, you can try notebooks [here](examples/tutorial/).
+
 The detailed documents are organized in [docs](docs/).
 [Sphinx](http://www.sphinx-doc.org) and the readthedocs theme is required to build the documentation in html formats. 
 ```bash
@@ -468,11 +474,13 @@ If you don't know how to start to contribute, you can refer to the following exa
 | Docs | [Improve docs quality](https://github.com/microsoft/qlib/pull/797/files) ;  [Fix a typo](https://github.com/microsoft/qlib/pull/774) | 
 | Feature |  Implement a [requested feature](https://github.com/microsoft/qlib/projects) like [this](https://github.com/microsoft/qlib/pull/754); [Refactor interfaces](https://github.com/microsoft/qlib/pull/539/files) |
 | Dataset | [Add a dataset](https://github.com/microsoft/qlib/pull/733) | 
-| Models |  [Implement a new model](https://github.com/microsoft/qlib/pull/689) | 
+| Models |  [Implement a new model](https://github.com/microsoft/qlib/pull/689), [some instructions to contribute models](https://github.com/microsoft/qlib/tree/main/examples/benchmarks#contributing) |
 
 [Good first issues](https://github.com/microsoft/qlib/labels/good%20first%20issue) are labelled to indicate that they are easy to start your contributions.
+
+You can find some impefect implementation in Qlib by  `rg 'TODO|FIXME' qlib`
  
-If you would like to become one of Qlib's maintainers to contribute more (e.g. help merge PR, triage issues), please contact us by email([qlib@microsoft.com](mailto:qlib@microsoft.com)).  We are glad to help you to set the right permission.
+If you would like to become one of Qlib's maintainers to contribute more (e.g. help merge PR, triage issues), please contact us by email([qlib@microsoft.com](mailto:qlib@microsoft.com)).  We are glad to help to upgrade your permission.
 
 ## Licence
 Most contributions require you to agree to a
